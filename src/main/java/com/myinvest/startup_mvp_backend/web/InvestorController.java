@@ -1,4 +1,4 @@
-package com.myinvest.startup_mvp_backend.controller;
+package com.myinvest.startup_mvp_backend.web;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
