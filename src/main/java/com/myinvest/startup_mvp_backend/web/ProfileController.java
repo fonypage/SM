@@ -186,11 +186,33 @@ public class ProfileController {
         }
 
         // Примеры метрик/серий для графиков (можно заменить на реальные)
-        Map<String, Object> charts = Map.of(
-                "mrr", List.of(10, 14, 19, 27, 38, 54),
-                "cac", List.of(200, 190, 185, 170, 160, 155),
-                "ltv", List.of(600, 640, 700, 760, 820, 900)
-        );
+        Map<String, Object> charts = new LinkedHashMap<>();
+        charts.put("labels", List.of("M1","M2","M3","M4","M5","M6","M7","M8","M9","M10","M11","M12"));
+        charts.put("revenue",     List.of(8, 12, 17, 24, 33, 45, 60, 78, 99, 120, 145, 170));
+        charts.put("expenses",    List.of(30, 32, 34, 36, 38, 40, 42, 45, 48, 50, 52, 55));
+        charts.put("cash_in_bank",List.of(300, 270, 235, 199, 161, 121, 79, 35, -10, 15, 50, 95));
+        charts.put("burn_rate",   List.of(30, 28, 26, 25, 23, 22, 21, 20, 19, 18, 18, 17));
+        charts.put("mrr",         List.of(6, 8, 11, 14, 18, 23, 29, 36, 44, 53, 63, 75));
+        charts.put("customers",   List.of(40, 55, 70, 90, 115, 145, 180, 220, 265, 315, 370, 430));
+        charts.put("arpu",        List.of(150, 150, 157, 155, 156, 158, 161, 164, 166, 168, 170, 174));
+        charts.put("cac",         List.of(230, 225, 220, 215, 210, 205, 200, 195, 190, 185, 180, 175));
+        charts.put("ltv",         List.of(600, 620, 640, 660, 685, 710, 740, 770, 800, 830, 860, 900));
+        charts.put("cohort_retention", List.of(1.00, 0.86, 0.79, 0.73, 0.68, 0.63, 0.60, 0.58, 0.56, 0.55, 0.54, 0.53));
+        charts.put("risk_radar", Map.of("technology",2,"market",1,"team",1,"finance",2,"legal",1));
+
+        /* Линейный график Revenue vs Expenses, точка безубыточности = пересечение.
+
+        Площадной Cash in bank (остаток денег).
+
+        Линии MRR, Customers.
+
+        Столбцы/линия CAC и ARPU/LTV.
+
+        Линия Burn rate.
+
+        Кривая Cohort retention (по месяцам).
+
+        Радар Risks. */
 
         // Верхняя иконка ЛК
         Map<String, Object> header = Map.of(
@@ -212,9 +234,9 @@ public class ProfileController {
         Map<String, Object> resp = new LinkedHashMap<>();
         resp.put("header", header);
         resp.put("role", "investor");
-        resp.put("projects", projects);   // даже пустой список нормален
-        resp.put("charts", charts);       // твой Map.of(...) с демо-данными — там null нет
-        resp.put("kpi", kpi);
+        resp.put("projects", projects); // твой список одобренных пакетов
+        resp.put("charts", charts);     // <-- вставили сюда
+        resp.put("kpi", kpi);           // твой KPI блок
         return resp;
     }
 

@@ -1,0 +1,15 @@
+server:
+  address: 0.0.0.0
+  port: ${PORT:8080}   # Render прокидывает PORT — берем его, иначе 8080
+
+spring:
+  datasource:
+    # H2 в файловом режиме на DISK-папке (мы примонтируем ее на Render)
+    url: jdbc:h2:file:${H2_PATH:/var/data/demo};AUTO_SERVER=TRUE;MODE=PostgreSQL
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
